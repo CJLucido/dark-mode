@@ -24,7 +24,7 @@ const Chart = ({ sparklineData }) => {
       }
       return null;
     })
-    .filter(data => data);
+    .filter(data => data); //what is this thing doing? turning value: price, date into data? ohhh LineChart must require the data to be called data
 
   return (
     <LineChart width={1100} height={300} data={formattedData}>
