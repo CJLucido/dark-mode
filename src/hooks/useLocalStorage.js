@@ -2,16 +2,27 @@ import {useState} from 'react'
 
 export default function useLocalStorage(key, initialValue){
     const [storedValue, setStoredValue] = useState(()=>{
-        if(window.localStorage.getItem(key)){
-            return JSON.parse(window.localStorage.getItem(key))
-        }
-        return(
-            initialValue
-        )
-    })
+        // if(window.localStorage.getItem(key)){
+        //     return JSON.parse(window.localStorage.getItem(key))
+        // }
+        // return(
+        //     initialValue
+        // )
+//below is a better way of doing it:
 
-    return (
-        null
-    )
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+
+        
+    });
+
+    function setValue(value){
+
+        //In the directions this step came before setting the stored value
+        window.localStorage.setItem(key, JSON.stringify(value));
+        setStoredValue(value)
+    }
+
+    return [storedValue, setValue]
     
 }
